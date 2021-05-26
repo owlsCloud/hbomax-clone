@@ -1,6 +1,6 @@
 const SideNav = (props) => {
   return (
-    <div className="side-nav">
+    <div className="side-nav ">
       <div className="side-nav__close-btn">
         <i className="fas fa-times" />
       </div>
