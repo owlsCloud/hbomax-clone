@@ -27,7 +27,7 @@ const Login = () => {
       return users.map((user) => {
         return (
           <div
-            onClick={selectUser}
+            onClick={() => selectUser(user.id)}
             className="login-user__user-box"
             key={user.id}
           >
