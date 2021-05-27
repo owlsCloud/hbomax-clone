@@ -1,6 +1,7 @@
 import Head from "next/head";
-
+import { useStateContext } from "../components/HBOProvider";
 export default function Home() {
+  const globalState = useStateContext();
   return (
     <div>
       <div className="login-user">
@@ -15,7 +16,7 @@ export default function Home() {
               src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjEzMjA0ODk1OF5BMl5BanBnXkFtZTcwMTA4ODM3OQ@@._V1_UY256_CR5,0,172,256_AL_.jpg"
               alt=""
             />
-            <div className="login-user__user-name">Liz</div>
+            <div className="login-user__user-name">{globalState.test}</div>
           </div>
         </div>
         <div className="login-user__buttons">
