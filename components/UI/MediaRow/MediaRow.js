@@ -7,8 +7,8 @@ const MediaRow = (props) => {
     return thumbnails;
   };
   return (
-    <div className="media-row">
-      <h3 className="media-row__title">Just Added</h3>
+    <div className={`media-row ${props.type}`}>
+      <h3 className="media-row__title">{props.title}</h3>
       <div className="media-row__thumbnails">
         {loopComp(
           <div className="media-row__thumbnail">
