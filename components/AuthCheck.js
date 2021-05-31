@@ -7,7 +7,7 @@ const AuthCheck = (component) => {
   const router = useRouter();
   const { hasMounted } = useMounted();
   let activeUID = ls("activeUID");
-  let users = ls("users") !== null ? ls("users", users) : [];
+  let users = ls("users") !== null ? ls("users") : [];
 
   useEffect(() => {
     if (activeUID === null && users.length < 1) {
@@ -25,7 +25,7 @@ const AuthCheck = (component) => {
         </div>
       </div>
     );
-  } else
+  } else {
     return (
       <div className="create-user">
         <div className="create-user__top">
@@ -33,6 +33,7 @@ const AuthCheck = (component) => {
         </div>
       </div>
     );
+  }
   return component;
 };
 export default AuthCheck;

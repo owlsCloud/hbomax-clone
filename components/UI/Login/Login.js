@@ -19,9 +19,7 @@ const Login = () => {
     ls("activeUID", id);
     router.push("/");
   };
-  const createUser = () => {
-    router.push("/");
-  };
+
   const showUsers = () => {
     if (!loadingUsers) {
       return users.map((user) => {
@@ -41,6 +39,9 @@ const Login = () => {
         );
       });
     }
+  };
+  const createUser = () => {
+    router.push("/");
   };
   return (
     <div className="login-user">
