@@ -1,4 +1,7 @@
+import { useStateContext } from "../../HBOProvider";
+
 const Account = (props) => {
+  const globalState = useStateContext();
   const loopComp = (comp, digit) => {
     let thumbnails = [];
     for (let i = 1; i < digit; i++) {
@@ -7,7 +10,11 @@ const Account = (props) => {
     return thumbnails;
   };
   return (
-    <div className="account ">
+    <div
+      className={`account ${
+        globalState.accountModalOpen ? "account--active" : ""
+      }`}
+    >
       <div className="account__details">
         <div className="account__title">My List</div>
         <div className="account__watch-list">
