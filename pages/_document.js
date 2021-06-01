@@ -17,10 +17,9 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap"
           />
           <link
-            rel="preload"
+            rel="stylesheet"
             as="style"
-            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            href="/fontaw/css/all.min.css"
             crossorigin="anonymous"
           />
         </Head>
