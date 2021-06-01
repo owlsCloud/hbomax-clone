@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import MainLayout from "../components/layouts/MainLayout";
 import FeaturedMedia from "../components/UI/FeaturedMedia/FeaturedMedia";
 import LazyLoad from "react-lazyload";
-
+import Placeholders from "../components/UI/Placeholders/Placeholders";
 import MediaRow from "../components/UI/MediaRow/MediaRow";
 import AuthCheck from "../components/AuthCheck";
 export default function Home() {
@@ -14,42 +14,60 @@ export default function Home() {
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia />
-      <LazyLoad height={680} placeholder={<h1>Laoding</h1>}>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Movies" type="large-v" />}
+      >
         <MediaRow
           title="Movies"
           type="large-v"
           endpoint="discover/movie?sort_by.desc=popularity&primary_release_year=2021"
         />
       </LazyLoad>
-      <LazyLoad height={333}>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Series" type="small-h" />}
+      >
         <MediaRow
           title="Series"
           type="small-h"
           endpoint="discover/tv?sort_by.desc=popularity&primary_release_year=2021"
         />
       </LazyLoad>
-      <LazyLoad height={440}>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Action" type="small-v" />}
+      >
         <MediaRow
           title="Action"
           type="small-v"
           endpoint="discover/movie?with_genres=28&primary_release_year=2021"
         />
       </LazyLoad>
-      <LazyLoad>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Movies" type="small-v" />}
+      >
         <MediaRow
           title="Horror"
           type="small-v"
           endpoint="discover/movie?with_genres=27&primary_release_year=2021"
         />
       </LazyLoad>
-      <LazyLoad height={200}>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Movies" type="small-v" />}
+      >
         <MediaRow
           title="Animation"
           type="small-v"
           endpoint="discover/movie?with_genres=16&primary_release_year=2021"
         />
       </LazyLoad>
-      <LazyLoad>
+      <LazyLoad
+        offset={-200}
+        placeholder={<Placeholders title="Movies" type="small-v" />}
+      >
         <MediaRow
           title="Sci-Fi"
           type="small-v"
