@@ -15,7 +15,7 @@ export default function Home() {
     <MainLayout>
       <FeaturedMedia />
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Movies" type="large-v" />}
       >
         <MediaRow
@@ -25,7 +25,7 @@ export default function Home() {
         />
       </LazyLoad>
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Series" type="small-h" />}
       >
         <MediaRow
@@ -35,7 +35,7 @@ export default function Home() {
         />
       </LazyLoad>
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Action" type="small-v" />}
       >
         <MediaRow
@@ -45,7 +45,7 @@ export default function Home() {
         />
       </LazyLoad>
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Movies" type="small-v" />}
       >
         <MediaRow
@@ -55,7 +55,7 @@ export default function Home() {
         />
       </LazyLoad>
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Movies" type="small-v" />}
       >
         <MediaRow
@@ -65,7 +65,7 @@ export default function Home() {
         />
       </LazyLoad>
       <LazyLoad
-        offset={-200}
+        offset={-400}
         placeholder={<Placeholders title="Movies" type="small-v" />}
       >
         <MediaRow
