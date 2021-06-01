@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-const MediaRow = (props) => {
+import { shuffleArray } from "../../utilities";
+const MediaRow = ({ endpoint, type, title }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [movies, setMoviesData] = useState([]);
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/discover/movie?with_genre=28&primary_release_year=2-21&api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US"
+        `https://api.themoviedb.org/3/${endpoint}&api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
       )
       .then((res) => {
-        setMoviesData(res.data.results);
+        setMoviesData(shuffleArray(res.data.results));
         setLoadingData(false);
       })
       .catch();
@@ -29,13 +30,14 @@ const MediaRow = (props) => {
           return <Thumbnail movieData={movie} />;
         });
   };
-  //MAIN COMPONENT---------------|
+  //MAIN COMPONENT-----------------------------|
   return (
-    <div className={`media-row ${props.type}`}>
-      <h3 className="media-row__title">{props.title}</h3>
+    <div className={`media-row ${type}`}>
+      <h3 className="media-row__title">{title}</h3>
       <div className="media-row__thumbnails">{showThumbnails()}</div>
     </div>
   );
+  //MAIN COMPONENT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^/
 };
 
 const Thumbnail = ({ movieData: { poster_path } }) => {
