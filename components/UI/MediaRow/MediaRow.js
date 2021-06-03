@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { shuffleArray } from "../../utilities";
+import Link from "next/link";
 const MediaRow = ({ endpoint, type, title }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [movies, setMoviesData] = useState([]);
@@ -41,7 +42,7 @@ const MediaRow = ({ endpoint, type, title }) => {
   //MAIN COMPONENT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^/
 };
 
-const Thumbnail = ({ type, movieData: { poster_path } }) => {
+const Thumbnail = ({ type, movieData: { poster_path, id } }) => {
   const thumbsize = (type) => {
     if (type === "large-v") {
       return "400";
@@ -57,14 +58,20 @@ const Thumbnail = ({ type, movieData: { poster_path } }) => {
     }
   };
   return (
-    <div className="media-row__thumbnail">
-      <img
-        src={`https://image.tmdb.org/t/p/w${thumbsize(type)}/${poster_path}`}
-      />
-      <div className="media-row__top-layer">
-        <i className="fas fa-play" />
-      </div>
-    </div>
+    <Link href={`/movie/${id}`}>
+      <a>
+        <div className="media-row__thumbnail">
+          <img
+            src={`https://image.tmdb.org/t/p/w${thumbsize(
+              type
+            )}/${poster_path}`}
+          />
+          <div className="media-row__top-layer">
+            <i className="fas fa-play" />
+          </div>
+        </div>
+      </a>
+    </Link>
   );
 };
 
