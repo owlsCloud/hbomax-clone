@@ -1,28 +1,54 @@
-const CastInfo = (props) => {
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const CastInfo = ({ mediaID }) => {
+  const [loadingData, setLoadingData] = useState(true);
+  const [credits, setCredits] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${mediaID}/credits?api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
+      )
+      .then((res) => {
+        setCredits(res.data);
+        setLoadingData(false);
+      })
+      .catch();
+  }, []);
+  const showCast = () => {
+    if (loadingData !== true) {
+      return credits.cast.map((member) => {
+        return (
+          <ul className="cast-info__crew">
+            <li>{member.character}</li>
+            <li>{member.name}</li>
+          </ul>
+        );
+      });
+    } else {
+      return <div>Loading Cast</div>;
+    }
+  };
+  const showCrew = () => {
+    if (loadingData !== true) {
+      return credits.crew.map((member) => {
+        return (
+          <ul className="cast-info__crew">
+            <li>{member.job}</li>
+            <li>{member.name}</li>
+          </ul>
+        );
+      });
+    } else {
+      return <div>Loading Crew</div>;
+    }
+  };
   return (
     <div className="cast-info">
-      <div className="cast-info__group-title"> Cast & Crew</div>
-      <div className="cast-info__list">
-        <ul className="cast-info__crew">
-          <li>Actor</li>
-          <li>George Lucas</li>
-        </ul>
-        <ul className="cast-info__crew">
-          <li>Actor</li>
-          <li>Elizabeth Olsen</li>
-        </ul>
-        <ul className="cast-info__crew">
-          <li>Writer</li>
-          <li>George Lucas</li>
-        </ul>
-      </div>
-      <div className="cast-info__group-title"> Director</div>
-      <div className="cast-info__list">
-        <ul className="cast-info__crew">
-          <li>Director</li>
-          <li>George Lucas</li>
-        </ul>
-      </div>
+      <div className="cast-info__group-title"> Cast</div>
+      <div className="cast-info__list">{showCast()}</div>
+      <div className="cast-info__group-title"> Crew</div>
+      <div className="cast-info__list">{showCrew()}</div>
     </div>
   );
 };

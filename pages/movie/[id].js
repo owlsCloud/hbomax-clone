@@ -7,6 +7,8 @@ import FeaturedMedia from "../../components/UI/FeaturedMedia/FeaturedMedia";
 import MediaRow from "../../components/UI/MediaRow/MediaRow";
 import CastInfo from "../../components/UI/CastInfo/CastInfo";
 import AuthCheck from "../../components/AuthCheck";
+import LazyLoad from "react-lazyload";
+import Placeholders from "../../components/UI/Placeholders/Placeholders";
 export default function SingleMediaPage(props) {
   const [mediaData, setMediaData] = useState(false);
   const router = useRouter();
@@ -23,7 +25,7 @@ export default function SingleMediaPage(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [mediaData]); //triggers re render when clicking on a similar movie
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
@@ -33,8 +35,17 @@ export default function SingleMediaPage(props) {
         linkUrl="/movies/id"
         type="single"
       />
-      {/* <MediaRow title="More Like This" type="small-v" />*/}
-      <CastInfo />
+      <LazyLoad
+        offset={-400}
+        placeholder={<Placeholders title="Movies " type="large-v" />}
+      >
+        <MediaRow
+          title="More Like This"
+          type="small-v"
+          endpoint={`movie/${props.query.id}/similar?`}
+        />
+      </LazyLoad>
+      <CastInfo mediaID={props.query.id} />
     </MainLayout>
   );
 }
