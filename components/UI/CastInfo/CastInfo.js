@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const CastInfo = ({ mediaID }) => {
+const CastInfo = ({ mediaID, mediaType }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [credits, setCredits] = useState([]);
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${mediaID}/credits?api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
+        `https://api.themoviedb.org/3/${
+          mediaType === "movie" ? "movie" : "tv"
+        }/${mediaID}/credits?api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
       )
       .then((res) => {
         setCredits(res.data);

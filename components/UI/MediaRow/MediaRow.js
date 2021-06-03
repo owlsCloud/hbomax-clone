@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { shuffleArray } from "../../utilities";
 import Link from "next/link";
-const MediaRow = ({ endpoint, type, title }) => {
+const MediaRow = ({ mediaType, endpoint, type, title }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [movies, setMoviesData] = useState([]);
   useEffect(() => {
@@ -28,7 +28,9 @@ const MediaRow = ({ endpoint, type, title }) => {
     return loadingData
       ? loopComp(<Skeleton />, 10)
       : movies.map((movie) => {
-          return <Thumbnail movieData={movie} type={type} />;
+          return (
+            <Thumbnail movieData={movie} type={type} mediaType={mediaType} />
+          );
         });
   };
 
@@ -42,7 +44,7 @@ const MediaRow = ({ endpoint, type, title }) => {
   //MAIN COMPONENT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^/
 };
 
-const Thumbnail = ({ type, movieData: { poster_path, id } }) => {
+const Thumbnail = ({ mediaType, type, movieData: { poster_path, id } }) => {
   const thumbsize = (type) => {
     if (type === "large-v") {
       return "400";
@@ -58,7 +60,7 @@ const Thumbnail = ({ type, movieData: { poster_path, id } }) => {
     }
   };
   return (
-    <Link href={`/movie/${id}`}>
+    <Link href={`/${mediaType === "movie" ? "movie" : "tv"}/${id}`}>
       <a>
         <div className="media-row__thumbnail">
           <img
@@ -81,5 +83,9 @@ const Skeleton = () => {
       <div className="media-row__thumbnail-skeleton-img"></div>
     </div>
   );
+};
+
+MediaRow.defaultProps = {
+  mediaType: "movie",
 };
 export default MediaRow;

@@ -14,23 +14,16 @@ export default function SingleMediaPage(props) {
   const router = useRouter();
   //const { id } = router.query;
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${props.query.id}?api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
-      )
-      .then((res) => {
-        setMediaData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [mediaData]); //triggers re render when clicking on a similar movie
+  //triggers re render when clicking on a similar movie
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
-        title={mediaData.title}
-        mediaUrl={`https://image.tmdb.org/t/p/w1280${mediaData.backdrop_path}`}
+        title={
+          props.query.mediaType === "movie"
+            ? props.mediaData.title
+            : props.mediaData.name
+        }
+        mediaUrl={`https://image.tmdb.org/t/p/w1280${props.mediaData.backdrop_path}`}
         location="In theaters and on HBO MAX. Streaming throughout May 23."
         linkUrl="/movies/id"
         type="single"
@@ -42,16 +35,27 @@ export default function SingleMediaPage(props) {
         <MediaRow
           title="More Like This"
           type="small-v"
-          endpoint={`movie/${props.query.id}/similar?`}
+          mediaType={props.query.mediaType}
+          endpoint={`${props.query.mediaType === "movie" ? "movie" : "tv"}/${
+            props.query.id
+          }/similar?`}
         />
       </LazyLoad>
-      <CastInfo mediaID={props.query.id} />
+      <CastInfo mediaID={props.query.id} mediaType={props.query.mediaType} />
     </MainLayout>
   );
 }
 
 export async function getServerSideProps(context) {
+  let mediaData;
+  try {
+    mediaData = await axios.get(
+      `https://api.themoviedb.org/3/${context.query.mediaType}/${context.query.id}?api_key=e24d921b613656dd1dfa11782b7f23f3&language=en-US`
+    );
+  } catch (error) {
+    console.log(error);
+  }
   return {
-    props: { query: context.query },
+    props: { mediaData: mediaData.data, query: context.query },
   };
 }

@@ -36,6 +36,7 @@ export default function Home() {
       >
         <MediaRow
           title="Series"
+          mediaType="series"
           type="small-h"
           endpoint="discover/tv?sort_by.desc=popularity&primary_release_year=2021"
         />
