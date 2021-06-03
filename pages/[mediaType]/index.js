@@ -9,27 +9,31 @@ import MediaRow from "../../components/UI/MediaRow/MediaRow";
 import AuthCheck from "../../components/AuthCheck";
 import GenreNav from "../../components/UI/GenreNav/GenreNav";
 import { shuffleArray } from "../../components/utilities";
+import { useStateContext } from "../../components/HBOProvider";
 export default function MediaTypePage({ mediaType, genresData, featuredData }) {
+  const globalState = useStateContext();
   const router = useRouter();
-  useEffect(() => {}, []);
+  const showRandomMedia = () => {
+    let thumbtype;
+    return genresData.map(() => {});
+  };
   return AuthCheck(
     <MainLayout>
-      {/* <FeaturedMedia
-        mediaUrl="https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&mute=1&loop=1&start=16"
-        title="Mortal Kombat"
-        location="In theaters and on HBO MAX. Streaming throughout May 23."
-        linkUrl="/movie/460465"
-        type="front"
-      /> */}
+      <FeaturedMedia
+        mediaUrl={`https://image.tmdb.org/t/p/w1280${featuredData.backdrop_path}`}
+        title={mediaType === "movie" ? featuredData.title : featuredData.name}
+        linkUrl={`/${mediaType}/${featuredData.id}`}
+        type="single"
+      />
       <GenreNav mediaType={mediaType} genresData={genresData} />
       <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Movies" type="large-v" />}
       >
         <MediaRow
-          title="Movies"
+          title="More Like This"
           type="large-v"
-          endpoint="discover/movie?sort_by.desc=popularity&primary_release_year=2021"
+          endpoint={`discover/tv?sort_by.desc=popularity&primary_release_year=2021`}
         />
       </LazyLoad>
     </MainLayout>

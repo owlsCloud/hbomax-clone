@@ -14,7 +14,6 @@ export default function SingleMediaPage(props) {
   const router = useRouter();
   //const { id } = router.query;
 
-  //triggers re render when clicking on a similar movie
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
@@ -23,7 +22,7 @@ export default function SingleMediaPage(props) {
             ? props.mediaData.title
             : props.mediaData.name
         }
-        mediaUrl={`https://image.tmdb.org/t/p/w1280${props.mediaData.backdrop_path}`}
+        mediaUrl={`https://image.tmdb.org/t/p/w1280${props.mediaData.backdrop_path}?`}
         location="In theaters and on HBO MAX. Streaming throughout May 23."
         linkUrl="/movies/id"
         type="single"
