@@ -18,10 +18,21 @@ const MediaRow = ({ mediaType, endpoint, type, title }) => {
   }, []);
 
   const loopComp = (comp, digit) => {
-    let thumbnails = [];
-    for (let i = 1; i < digit; i++) {
-      thumbnails.push(comp);
-    }
+    let thumbnails = [
+      <Skeleton key="a" />,
+      <Skeleton key="b" />,
+      <Skeleton key="c" />,
+      <Skeleton key="d" />,
+      <Skeleton key="e" />,
+      <Skeleton key="f" />,
+      <Skeleton key="g" />,
+      <Skeleton key="h" />,
+      <Skeleton key="i" />,
+      <Skeleton key="j" />,
+    ];
+    // for (let i = 1; i < digit; i++) {
+    //   thumbnails.push(comp);
+    // }
     return thumbnails;
   };
   const showThumbnails = (type) => {
@@ -29,7 +40,12 @@ const MediaRow = ({ mediaType, endpoint, type, title }) => {
       ? loopComp(<Skeleton />, 10)
       : movies.map((movie) => {
           return (
-            <Thumbnail movieData={movie} type={type} mediaType={mediaType} />
+            <Thumbnail
+              key={movie.id}
+              movieData={movie}
+              type={type}
+              mediaType={mediaType}
+            />
           );
         });
   };

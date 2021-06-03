@@ -2,13 +2,13 @@ import { useStateContext } from "../../HBOProvider";
 
 const Account = (props) => {
   const globalState = useStateContext();
-  const loopComp = (comp, digit) => {
-    let thumbnails = [];
-    for (let i = 1; i < digit; i++) {
-      thumbnails.push(comp);
-    }
-    return thumbnails;
-  };
+  // const loopComp = (comp, digit) => {
+  //   let thumbnails = [];
+  //   for (let i = 1; i < digit; i++) {
+  //     thumbnails.push(comp);
+  //   }
+  //   return thumbnails;
+  // };
   return (
     <div
       className={`account ${
@@ -18,22 +18,19 @@ const Account = (props) => {
       <div className="account__details">
         <div className="account__title">My List</div>
         <div className="account__watch-list">
-          {loopComp(
-            <div className="account__watch-video">
-              <img src="https://cdn.europosters.eu/image/750webp/86752.webp" />
-              <div className="account__watch-overlay">
-                <div className="account__watch-buttons">
-                  <div className="account__watch-circle">
-                    <i className="fas fa-play" />
-                  </div>
-                  <div className="account__watch-circle">
-                    <i className="fas fa-times" />
-                  </div>
+          <div className="account__watch-video">
+            <img src="https://cdn.europosters.eu/image/750webp/86752.webp" />
+            <div className="account__watch-overlay">
+              <div className="account__watch-buttons">
+                <div className="account__watch-circle">
+                  <i className="fas fa-play" />
+                </div>
+                <div className="account__watch-circle">
+                  <i className="fas fa-times" />
                 </div>
               </div>
-            </div>,
-            6
-          )}
+            </div>
+          </div>
         </div>
       </div>
       <div className="account__menu">
