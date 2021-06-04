@@ -10,12 +10,32 @@ import AuthCheck from "../../components/AuthCheck";
 import GenreNav from "../../components/UI/GenreNav/GenreNav";
 import { shuffleArray } from "../../components/utilities";
 import { useStateContext } from "../../components/HBOProvider";
-export default function MediaTypePage({ mediaType, genresData, featuredData }) {
+export default function MediaTypePage({
+  query: { mediaType },
+  genresData,
+  featuredData,
+}) {
   const globalState = useStateContext();
   const router = useRouter();
   const showRandomMedia = () => {
-    let thumbtype;
-    return genresData.map(() => {});
+    let thumbType;
+    return genresData.map((genre) => {
+      thumbType = shuffleArray(globalState.thumbTypes)[0];
+      return (
+        <div key={genre.id}>
+          <LazyLoad
+            offset={-200}
+            placeholder={<Placeholders title={genre.name} type={thumbType} />}
+          >
+            <MediaRow
+              title={genre.name}
+              type={thumbType}
+              endpoint={`discover/${mediaType}?with_genres=${genre.id}&sort_by.desc=popularity&primary_release_year=2021`}
+            />
+          </LazyLoad>
+        </div>
+      );
+    });
   };
   return AuthCheck(
     <MainLayout>
@@ -26,16 +46,7 @@ export default function MediaTypePage({ mediaType, genresData, featuredData }) {
         type="single"
       />
       <GenreNav mediaType={mediaType} genresData={genresData} />
-      <LazyLoad
-        offset={-400}
-        placeholder={<Placeholders title="Movies" type="large-v" />}
-      >
-        <MediaRow
-          title="More Like This"
-          type="large-v"
-          endpoint={`discover/tv?sort_by.desc=popularity&primary_release_year=2021`}
-        />
-      </LazyLoad>
+      {showRandomMedia()}
     </MainLayout>
   );
 }

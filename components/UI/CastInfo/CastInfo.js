@@ -16,7 +16,7 @@ const CastInfo = ({ mediaID, mediaType }) => {
         setLoadingData(false);
       })
       .catch();
-  }, []);
+  }, [credits]);
   const showCast = () => {
     if (loadingData !== true) {
       return credits.cast.map((member) => {
