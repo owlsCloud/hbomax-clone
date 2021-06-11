@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { shuffleArray } from "../../utilities";
 import Link from "next/link";
-const MediaRow = ({ mediaType, endpoint, type, title }) => {
+const MediaRow = ({ updateData, mediaType, endpoint, type, title }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [movies, setMoviesData] = useState([]);
   useEffect(() => {
@@ -15,7 +15,7 @@ const MediaRow = ({ mediaType, endpoint, type, title }) => {
         setLoadingData(false);
       })
       .catch();
-  }, []);
+  }, [updateData]);
 
   const loopComp = (comp, digit) => {
     let thumbnails = [

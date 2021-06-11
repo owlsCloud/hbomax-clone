@@ -28,6 +28,7 @@ export default function MediaTypePage({
             placeholder={<Placeholders title={genre.name} type={thumbType} />}
           >
             <MediaRow
+              updateData={genre_id}
               title={genre.name}
               type={thumbType}
               endpoint={`discover/${mediaType}?with_genres=${genre_id}&sort_by.desc=popularity&primary_release_year=2021&page=${

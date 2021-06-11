@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const CastInfo = ({ mediaID, mediaType }) => {
+const CastInfo = ({ updateData, mediaID, mediaType }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [credits, setCredits] = useState([]);
   useEffect(() => {
@@ -16,7 +16,7 @@ const CastInfo = ({ mediaID, mediaType }) => {
         setLoadingData(false);
       })
       .catch();
-  }, [credits]);
+  }, [updateData]);
   const showCast = () => {
     if (loadingData !== true) {
       return credits.cast.map((member) => {
