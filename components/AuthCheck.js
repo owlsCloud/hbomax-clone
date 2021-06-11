@@ -10,7 +10,7 @@ const AuthCheck = (component) => {
   let users = ls("users") !== null ? ls("users") : [];
 
   useEffect(() => {
-    if (activeUID === null && users.length < 1) {
+    if (activeUID === null || users.length < 1) {
       router.push("/create");
     }
   }, []);
@@ -34,6 +34,5 @@ const AuthCheck = (component) => {
       </div>
     );
   }
-  return component;
 };
 export default AuthCheck;

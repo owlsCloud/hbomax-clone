@@ -19,9 +19,9 @@ const CastInfo = ({ updateData, mediaID, mediaType }) => {
   }, [updateData]);
   const showCast = () => {
     if (loadingData !== true) {
-      return credits.cast.map((member) => {
+      return credits.cast.map((member, i) => {
         return (
-          <ul className="cast-info__crew">
+          <ul className="cast-info__crew" key={i}>
             <li>{member.character}</li>
             <li>{member.name}</li>
           </ul>
@@ -33,9 +33,9 @@ const CastInfo = ({ updateData, mediaID, mediaType }) => {
   };
   const showCrew = () => {
     if (loadingData !== true) {
-      return credits.crew.map((member) => {
+      return credits.crew.map((member, i) => {
         return (
-          <ul className="cast-info__crew">
+          <ul className="cast-info__crew" key={i}>
             <li>{member.job}</li>
             <li>{member.name}</li>
           </ul>

@@ -44,6 +44,8 @@ export default function MediaTypePage({
         title={mediaType === "movie" ? featuredData.title : featuredData.name}
         linkUrl={`/${mediaType}/${featuredData.id}`}
         type="single"
+        mediaType={mediaType}
+        mediaId={featuredData.id}
       />
       <GenreNav mediaType={mediaType} genresData={genresData} />
       {showRandomMedia()}

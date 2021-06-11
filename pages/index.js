@@ -1,5 +1,3 @@
-import Head from "next/head";
-import Login from "../components/UI/Login/Login";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import MainLayout from "../components/layouts/MainLayout";
@@ -19,6 +17,8 @@ export default function Home() {
         location="In theaters and on HBO MAX. Streaming throughout May 23."
         linkUrl="/movie/460465"
         type="front"
+        mediaType={"movie"}
+        mediaId={460465}
       />
       <LazyLoad
         offset={-400}
